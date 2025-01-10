@@ -57,7 +57,6 @@ jobs:
             const puppeteer = require('puppeteer-core');
             const fs = require('fs');
             const path = require('path');
-            const io = require('@actions/io');
 
             // Parse changed files
             const changedFiles = JSON.parse('${{ steps.changed-files.outputs.files }}');
