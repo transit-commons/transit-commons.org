@@ -3,6 +3,10 @@ layout: layouts/base.njk
 title: Home
 ---
 
+<div class="draft-banner">
+    ⚠️ DRAFT WEBSITE - CONTENT IS PLACEHOLDER ONLY - NOT AUTHORITATIVE ⚠️
+</div>
+
 <section id="hero">
     <div class="container">
         <h1>Advancing Transit Data Standards</h1>
