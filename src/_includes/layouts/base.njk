@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - {{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">transit-data.org</div>
+                <div class="nav-links">
+                    <a href="/about">About</a>
+                    <a href="/initiatives">Initiatives</a>
+                    <a href="/get-involved">Get Involved</a>
+                    <a href="/outcomes">Outcomes</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Get in touch with our working groups</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p>Access our published materials</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ site.buildYear }} {{ site.title }}</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
