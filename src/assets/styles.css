@@ -382,14 +382,59 @@ footer {
     color: var(--text-secondary);
 }
 
+.menu-toggle {
+    display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero-content {
         flex-direction: column;
     }
 
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        color: var(--accent-green);
+    }
+
     .nav-links {
         display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        margin: 0;
+        padding: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.05);
     }
 
     #hero h1 {
@@ -398,5 +443,9 @@ footer {
 
     .group-box {
         max-width: 100%;
+    }
+
+    main {
+        padding-top: 8rem;
     }
 }
