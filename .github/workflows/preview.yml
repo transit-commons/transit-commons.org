@@ -151,12 +151,11 @@ jobs:
 
             // Ensure screenshot paths exist
             const getScreenshotPath = (type, route) => {
-              const dir = path.join('screenshots', path.dirname(route));
+              const dir = path.join('screenshots', type);
               fs.mkdirSync(dir, { recursive: true });
 
               // Convert root path to 'home'
-              const filename = route === '/' ? `${type}/home.png` : `${type}${route.replace(/\/$/, '')}.png`;
-              return path.join('screenshots', filename);
+              return path.join(dir, route === '/' ? `home.png` : `${route.replace(/\/$/, '')}.png`);
             };
 
             // Take screenshots
