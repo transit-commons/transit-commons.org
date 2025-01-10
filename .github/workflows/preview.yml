@@ -42,13 +42,22 @@ jobs:
           cd pr
           npm ci
 
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Install Puppeteer
+        run: npm install puppeteer-core
+
       - name: Build sites and capture screenshots
         uses: actions/github-script@v7
         with:
           script: |
-            const puppeteer = require('puppeteer');
+            const puppeteer = require('puppeteer-core');
             const fs = require('fs');
             const path = require('path');
+            const io = require('@actions/io');
 
             // Parse changed files
             const changedFiles = JSON.parse('${{ steps.changed-files.outputs.files }}');
@@ -79,7 +88,10 @@ jobs:
             fs.mkdirSync('screenshots', { recursive: true });
 
             // Take screenshots
-            const browser = await puppeteer.launch();
+            const browser = await puppeteer.launch({
+              executablePath: await io.which('chrome'),
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
             const page = await browser.newPage();
             await page.setViewport({ width: 1200, height: 800 });
 
