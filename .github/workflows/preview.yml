@@ -83,24 +83,34 @@ jobs:
             });
 
             // Start servers with output logging
-            const baseServer = require('child_process').spawn('npm', ['start'], { cwd: 'base' });
-            const prServer = require('child_process').spawn('npm', ['start'], { cwd: 'pr' });
-
             console.log('Starting development servers...');
+            const { spawn } = require('child_process');
 
-            baseServer.stdout.on('data', (data) => {
-              console.log(`Base server: ${data}`);
-            });
-            baseServer.stderr.on('data', (data) => {
-              console.error(`Base server error: ${data}`);
+            const baseServer = spawn('npm', ['start'], { cwd: 'base', detached: true });
+            const prServer = spawn('npm', ['start'], { cwd: 'pr', detached: true });
+
+            const servers = [baseServer, prServer];
+            servers.forEach((server, i) => {
+              const prefix = i === 0 ? 'Base' : 'PR';
+              server.stdout.on('data', (data) => console.log(`${prefix} server: ${data}`));
+              server.stderr.on('data', (data) => console.error(`${prefix} server error: ${data}`));
+              server.on('exit', (code) => console.log(`${prefix} server exited with code ${code}`));
             });
 
-            prServer.stdout.on('data', (data) => {
-              console.log(`PR server: ${data}`);
-            });
-            prServer.stderr.on('data', (data) => {
-              console.error(`PR server error: ${data}`);
-            });
+            // Function to kill servers
+            const cleanup = () => {
+              console.log('Cleaning up servers...');
+              servers.forEach(server => {
+                try {
+                  if (!server.killed) {
+                    process.kill(-server.pid); // Kill entire process group
+                    console.log(`Killed process group ${server.pid}`);
+                  }
+                } catch (err) {
+                  console.error(`Error killing server: ${err}`);
+                }
+              });
+            };
 
             // Wait for servers to start
             console.log('Waiting for servers to initialize...');
@@ -121,45 +131,48 @@ jobs:
             await page.setViewport({ width: 1200, height: 800 });
             console.log('Browser ready for screenshots');
 
-            let comment = '## Visual Changes\n\n';
-            console.log('Pages to capture:', Array.from(pagesToCapture));
-            for (const route of pagesToCapture) {
-              // Capture base version
-              console.log(`Navigating to base version of ${route}...`);
-              await page.goto(`http://localhost:8080${route}`);
-              console.log('Taking base screenshot...');
-              await page.screenshot({
-                path: `screenshots/base${route.replace(/\/$/, '')}.png`
-              });
+            try {
+              let comment = '## Visual Changes\n\n';
+              console.log('Pages to capture:', Array.from(pagesToCapture));
+              for (const route of pagesToCapture) {
+                // Capture base version
+                console.log(`Navigating to base version of ${route}...`);
+                await page.goto(`http://localhost:8080${route}`);
+                console.log('Taking base screenshot...');
+                await page.screenshot({
+                  path: `screenshots/base${route.replace(/\/$/, '')}.png`
+                });
 
-              // Capture PR version
-              console.log(`Navigating to PR version of ${route}...`);
-              await page.goto(`http://localhost:8081${route}`);
-              console.log('Taking PR screenshot...');
-              await page.screenshot({
-                path: `screenshots/pr${route.replace(/\/$/, '')}.png`
-              });
+                // Capture PR version
+                console.log(`Navigating to PR version of ${route}...`);
+                await page.goto(`http://localhost:8081${route}`);
+                console.log('Taking PR screenshot...');
+                await page.screenshot({
+                  path: `screenshots/pr${route.replace(/\/$/, '')}.png`
+                });
 
-              // Add to comment
-              const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
-              comment += `### ${pageName}\n`;
-              comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
-              comment += '<tr>';
-              comment += `<td><img src="screenshots/base${route.replace(/\/$/, '')}.png" width="600"></td>`;
-              comment += `<td><img src="screenshots/pr${route.replace(/\/$/, '')}.png" width="600"></td>`;
-              comment += '</tr></table>\n\n';
+                // Add to comment
+                const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
+                comment += `### ${pageName}\n`;
+                comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
+                comment += '<tr>';
+                comment += `<td><img src="screenshots/base${route.replace(/\/$/, '')}.png" width="600"></td>`;
+                comment += `<td><img src="screenshots/pr${route.replace(/\/$/, '')}.png" width="600"></td>`;
+                comment += '</tr></table>\n\n';
+              }
+
+              console.log('Closing browser...');
+              await browser.close();
+              console.log('Browser closed');
+
+              // Post comment
+              console.log('Posting comment to PR...');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            } finally {
+              cleanup();
             }
-
-            console.log('Closing browser and killing servers...');
-            await browser.close();
-            baseServer.kill();
-            prServer.kill();
-
-            // Post comment
-            console.log('Posting comment to PR...');
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: comment
-            });
