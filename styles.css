@@ -1,0 +1,315 @@
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #121212;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent-green: #00ff9d;
+    --accent-blue: #0066ff;
+    --trb-color: var(--accent-green);
+    --apta-color: var(--accent-blue);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    letter-spacing: -0.5px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--bg-secondary);
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--accent-green);
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-left: 2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-green);
+}
+
+/* Hero Section */
+#hero {
+    padding: 120px 0 60px;
+    text-align: center;
+    background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.group-box {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex: 1;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+}
+
+.group-box:hover {
+    transform: translateY(-5px);
+}
+
+.group-box.trb {
+    border-left: 4px solid var(--trb-color);
+}
+
+.group-box.apta {
+    border-left: 4px solid var(--apta-color);
+}
+
+.collaboration-symbol {
+    font-size: 2rem;
+    color: var(--text-secondary);
+}
+
+/* About Section */
+#about {
+    padding: 80px 0;
+}
+
+.group-detail {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.group-detail h2 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.group-detail h3 {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.mission-points {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.mission-points li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.mission-points li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+}
+
+/* Initiatives Section */
+#initiatives {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.initiatives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.initiative-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.initiative-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.initiative-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.initiative-card:hover::before {
+    opacity: 1;
+}
+
+/* Volunteer Section */
+#volunteer {
+    padding: 80px 0;
+}
+
+.volunteer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.volunteer-card {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
+    color: var(--bg-primary);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Outcomes Section */
+#outcomes {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+}
+
+.outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.outcome-card {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer */
+footer {
+    background: var(--bg-secondary);
+    padding: 60px 0 20px;
+    margin-top: 80px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.footer-section p:hover {
+    color: var(--accent-blue);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+    .group-box {
+        max-width: 100%;
+    }
+}
