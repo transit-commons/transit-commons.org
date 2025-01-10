@@ -80,34 +80,60 @@ jobs:
               }
             });
 
-            // Start servers
+            // Start servers with output logging
             const baseServer = require('child_process').spawn('npm', ['start'], { cwd: 'base' });
             const prServer = require('child_process').spawn('npm', ['start'], { cwd: 'pr' });
 
+            console.log('Starting development servers...');
+
+            baseServer.stdout.on('data', (data) => {
+              console.log(`Base server: ${data}`);
+            });
+            baseServer.stderr.on('data', (data) => {
+              console.error(`Base server error: ${data}`);
+            });
+
+            prServer.stdout.on('data', (data) => {
+              console.log(`PR server: ${data}`);
+            });
+            prServer.stderr.on('data', (data) => {
+              console.error(`PR server error: ${data}`);
+            });
+
             // Wait for servers to start
+            console.log('Waiting for servers to initialize...');
             await new Promise(resolve => setTimeout(resolve, 5000));
+            console.log('Servers should be ready');
 
             // Create screenshots directory
             fs.mkdirSync('screenshots', { recursive: true });
 
             // Take screenshots
+            console.log('Launching Chrome...');
             const browser = await puppeteer.launch({
               executablePath: await io.which('chrome'),
               args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
+            console.log('Creating new page...');
             const page = await browser.newPage();
             await page.setViewport({ width: 1200, height: 800 });
+            console.log('Browser ready for screenshots');
 
             let comment = '## Visual Changes\n\n';
+            console.log('Pages to capture:', Array.from(pagesToCapture));
             for (const route of pagesToCapture) {
               // Capture base version
+              console.log(`Navigating to base version of ${route}...`);
               await page.goto(`http://localhost:8080${route}`);
+              console.log('Taking base screenshot...');
               await page.screenshot({
                 path: `screenshots/base${route.replace(/\/$/, '')}.png`
               });
 
               // Capture PR version
+              console.log(`Navigating to PR version of ${route}...`);
               await page.goto(`http://localhost:8081${route}`);
+              console.log('Taking PR screenshot...');
               await page.screenshot({
                 path: `screenshots/pr${route.replace(/\/$/, '')}.png`
               });
@@ -122,11 +148,13 @@ jobs:
               comment += '</tr></table>\n\n';
             }
 
+            console.log('Closing browser and killing servers...');
             await browser.close();
             baseServer.kill();
             prServer.kill();
 
             // Post comment
+            console.log('Posting comment to PR...');
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
