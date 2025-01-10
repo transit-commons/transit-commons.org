@@ -1,0 +1,120 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [main]
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          cd pr
+          echo "files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep '^src/.*\.md$\|^src/_includes/.*\.njk$\|^src/assets/.*\.css$' | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (base)
+        run: |
+          cd base
+          npm ci
+
+      - name: Install dependencies (PR)
+        run: |
+          cd pr
+          npm ci
+
+      - name: Build sites and capture screenshots
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const puppeteer = require('puppeteer');
+            const fs = require('fs');
+            const path = require('path');
+
+            // Parse changed files
+            const changedFiles = JSON.parse('${{ steps.changed-files.outputs.files }}');
+            const shouldCaptureHomepage = changedFiles.some(file =>
+              file.includes('base.njk') || file.includes('styles.css')
+            );
+
+            // Get pages to screenshot
+            const pagesToCapture = new Set();
+            if (shouldCaptureHomepage) {
+              pagesToCapture.add('/');
+            }
+            changedFiles.forEach(file => {
+              if (file.endsWith('.md')) {
+                const route = file.replace(/^src/, '').replace(/\.md$/, '/');
+                pagesToCapture.add(route);
+              }
+            });
+
+            // Start servers
+            const baseServer = require('child_process').spawn('npm', ['start'], { cwd: 'base' });
+            const prServer = require('child_process').spawn('npm', ['start'], { cwd: 'pr' });
+
+            // Wait for servers to start
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            // Create screenshots directory
+            fs.mkdirSync('screenshots', { recursive: true });
+
+            // Take screenshots
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.setViewport({ width: 1200, height: 800 });
+
+            let comment = '## Visual Changes\n\n';
+            for (const route of pagesToCapture) {
+              // Capture base version
+              await page.goto(`http://localhost:8080${route}`);
+              await page.screenshot({
+                path: `screenshots/base${route.replace(/\/$/, '')}.png`
+              });
+
+              // Capture PR version
+              await page.goto(`http://localhost:8081${route}`);
+              await page.screenshot({
+                path: `screenshots/pr${route.replace(/\/$/, '')}.png`
+              });
+
+              // Add to comment
+              const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
+              comment += `### ${pageName}\n`;
+              comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
+              comment += '<tr>';
+              comment += `<td><img src="screenshots/base${route.replace(/\/$/, '')}.png" width="600"></td>`;
+              comment += `<td><img src="screenshots/pr${route.replace(/\/$/, '')}.png" width="600"></td>`;
+              comment += '</tr></table>\n\n';
+            }
+
+            await browser.close();
+            baseServer.kill();
+            prServer.kill();
+
+            // Post comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
