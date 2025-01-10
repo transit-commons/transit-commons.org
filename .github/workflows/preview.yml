@@ -5,6 +5,9 @@ on:
     types: [opened, synchronize]
     branches: [main]
 
+permissions:
+  issues: write
+
 jobs:
   preview:
     runs-on: ubuntu-latest
