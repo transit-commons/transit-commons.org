@@ -18,12 +18,14 @@ jobs:
         with:
           ref: ${{ github.base_ref }}
           path: base
+          fetch-depth: 0
 
       - name: Checkout PR
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           path: pr
+          fetch-depth: 0
 
       - name: Get changed files
         id: changed-files
