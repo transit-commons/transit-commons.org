@@ -153,7 +153,10 @@ jobs:
             const getScreenshotPath = (type, route) => {
               const dir = path.join('screenshots', path.dirname(route));
               fs.mkdirSync(dir, { recursive: true });
-              return path.join('screenshots', `${type}${route.replace(/\/$/, '')}.png`);
+
+              // Convert root path to 'home'
+              const filename = route === '/' ? `${type}/home.png` : `${type}${route.replace(/\/$/, '')}.png`;
+              return path.join('screenshots', filename);
             };
 
             // Take screenshots
@@ -170,45 +173,55 @@ jobs:
             try {
               let comment = '## Visual Changes\n\n';
               console.log('Pages to capture:', Array.from(pagesToCapture));
-              for (const route of pagesToCapture) {
-                // Capture base version
-                console.log(`Navigating to base version of ${route}...`);
-                await page.goto(`http://localhost:8080${route}`);
-                console.log('Taking base screenshot...');
-              const basePath = getScreenshotPath('base', route);
-              await page.screenshot({ path: basePath });
-              console.log(`Saved base screenshot to ${basePath}`);
 
-              // Capture PR version
-              console.log(`Navigating to PR version of ${route}...`);
-              await page.goto(`http://localhost:8081${route}`);
-              console.log('Taking PR screenshot...');
-              const prPath = getScreenshotPath('pr', route);
-              await page.screenshot({ path: prPath });
-              console.log(`Saved PR screenshot to ${prPath}`);
+              try {
+                for (const route of pagesToCapture) {
+                  try {
+                    // Capture base version
+                    console.log(`Navigating to base version of ${route}...`);
+                    await page.goto(`http://localhost:8080${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
+                    console.log('Taking base screenshot...');
+                    const basePath = getScreenshotPath('base', route);
+                    await page.screenshot({ path: basePath });
+                    console.log(`Saved base screenshot to ${basePath}`);
 
-                // Add to comment
-                const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
-                comment += `### ${pageName}\n`;
-                comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
-                comment += '<tr>';
-                comment += `<td><img src="screenshots/base${route.replace(/\/$/, '')}.png" width="600"></td>`;
-                comment += `<td><img src="screenshots/pr${route.replace(/\/$/, '')}.png" width="600"></td>`;
-                comment += '</tr></table>\n\n';
+                    // Capture PR version
+                    console.log(`Navigating to PR version of ${route}...`);
+                    await page.goto(`http://localhost:8081${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
+                    console.log('Taking PR screenshot...');
+                    const prPath = getScreenshotPath('pr', route);
+                    await page.screenshot({ path: prPath });
+                    console.log(`Saved PR screenshot to ${prPath}`);
+
+                    // Add to comment
+                    const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
+                    comment += `### ${pageName}\n`;
+                    comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
+                    comment += '<tr>';
+                    comment += `<td><img src="${basePath}" width="600"></td>`;
+                    comment += `<td><img src="${prPath}" width="600"></td>`;
+                    comment += '</tr></table>\n\n';
+                  } catch (pageError) {
+                    console.error(`Error capturing screenshots for ${route}:`, pageError);
+                  }
+                }
+
+                console.log('Closing browser...');
+                await browser.close();
+                console.log('Browser closed');
+
+                // Post comment
+                console.log('Posting comment to PR...');
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: comment
+                });
+              } catch (err) {
+                console.error('Error in screenshot process:', err);
+                process.exit(1);
               }
-
-              console.log('Closing browser...');
-              await browser.close();
-              console.log('Browser closed');
-
-              // Post comment
-              console.log('Posting comment to PR...');
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: comment
-              });
             } finally {
               cleanup();
               process.exit(0);
