@@ -5,6 +5,8 @@ title: Outcomes & Publications
 
 # Outcomes & Publications
 
+<div class="page-content">
+
 ## Research Papers
 
 Our research initiatives produce comprehensive findings and recommendations that help shape the future of transit data management:
@@ -22,6 +24,10 @@ Our research initiatives produce comprehensive findings and recommendations that
 - Cloud Infrastructure for Transit Agencies
 - Privacy Considerations in Modern Transit Data
 - Integration Strategies for Legacy Systems
+
+</div>
+
+<div class="page-content">
 
 ## Standards Documents
 
@@ -41,6 +47,10 @@ Official guidelines and best practices developed through APTA's standards proces
 - Transit API Design Guidelines
 - Data Quality Assessment Framework
 
+</div>
+
+<div class="page-content">
+
 ## Case Studies
 
 Real-world implementations and success stories from transit agencies:
@@ -58,6 +68,10 @@ Real-world implementations and success stories from transit agencies:
 - Change Management Strategies
 - Staff Training Programs
 - System Migration Plans
+
+</div>
+
+<div class="page-content">
 
 ## Resources
 
@@ -77,4 +91,6 @@ Real-world implementations and success stories from transit agencies:
 
 <div class="cta-container">
     <button class="cta-button" onclick="alert('Resource library coming soon!')">Access Resource Library</button>
+</div>
+
 </div>

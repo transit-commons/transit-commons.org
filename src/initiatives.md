@@ -5,6 +5,8 @@ title: Initiatives
 
 # Current Initiatives
 
+<div class="page-content">
+
 ## Research Projects
 
 Our ongoing research projects focus on understanding and improving transit data implementation across agencies:
@@ -20,6 +22,10 @@ Our ongoing research projects focus on understanding and improving transit data 
 - Identifying opportunities for improved data sharing
 - Evaluating emerging transit data applications
 - Developing implementation recommendations
+
+</div>
+
+<div class="page-content">
 
 ## Standards Development
 
@@ -37,6 +43,10 @@ We're actively working on creating and refining data standards for transit opera
 - Integration pathway recommendations
 - Migration strategies for legacy systems
 - Validation and testing procedures
+
+</div>
+
+<div class="page-content">
 
 ## Industry Surveys
 
@@ -56,3 +66,5 @@ Our comprehensive industry surveys help understand the current state of transit 
 - Recommendation documents
 - Implementation guides
 - Case studies and success stories
+
+</div>

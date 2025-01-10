@@ -5,6 +5,7 @@ title: About
 
 # About Our Collaboration
 
+<div class="page-content">
 The transit-data.org initiative represents a unique collaboration between two key groups in the transit data ecosystem:
 
 ## TRB AP090(1) Transit Data Subcommittee
@@ -17,6 +18,10 @@ The Transportation Research Board's AP090(1) Transit Data Subcommittee on Data I
 - Identifying gaps and opportunities in data infrastructure
 - Publishing research findings and recommendations
 
+</div>
+
+<div class="page-content">
+
 ## APTA Data Standards & Utilization Sub-working Group
 
 The American Public Transportation Association's Data Standards & Utilization sub-working group focuses on practical implementation and standardization. Key activities include:
@@ -26,6 +31,10 @@ The American Public Transportation Association's Data Standards & Utilization su
 - Supporting transit agencies in data implementation
 - Facilitating knowledge sharing across the industry
 - Publishing official standards documents
+
+</div>
+
+<div class="page-content">
 
 ## Our Combined Mission
 
@@ -37,3 +46,5 @@ Together, these groups create a powerful synergy between research and implementa
 4. **Industry Impact**: Combined expertise leads to more effective and practical solutions
 
 This collaboration ensures that transit data standards and practices are both theoretically sound and practically implementable.
+
+</div>

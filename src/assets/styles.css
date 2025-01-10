@@ -20,6 +20,87 @@ body {
     color: var(--text-primary);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
+    padding-top: 60px; /* Add space for fixed nav */
+}
+
+/* Content Styles */
+main {
+    padding: 4rem 0 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+main h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--accent-green);
+}
+
+main h2 {
+    font-size: 2rem;
+    margin: 2rem 0 1rem;
+    color: var(--text-primary);
+}
+
+main h3 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-secondary);
+}
+
+main p {
+    margin-bottom: 1.2rem;
+}
+
+main ul {
+    margin: 1rem 0 1.5rem 2rem;
+    list-style-type: none;
+}
+
+main ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+main ul li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+main strong, main a {
+    color: var(--accent-blue);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+main a:hover {
+    color: var(--accent-green);
+}
+
+/* Page-specific styles */
+.page-content {
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-content + .page-content {
+    margin-top: 2rem;
+}
+
+main ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+main ol li {
+    margin-bottom: 0.8rem;
 }
 
 h1, h2, h3 {

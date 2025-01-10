@@ -5,6 +5,8 @@ title: Get Involved
 
 # Get Involved
 
+<div class="page-content">
+
 ## Join Our Working Groups
 
 We welcome transit professionals, researchers, and technology experts to join our collaborative efforts. Your expertise can help shape the future of transit data standards and practices.
@@ -17,6 +19,10 @@ We welcome transit professionals, researchers, and technology experts to join ou
 - Present findings at TRB conferences
 - Collaborate on use case studies
 
+</div>
+
+<div class="page-content">
+
 ### APTA Sub-working Group Involvement
 
 - Join standards development teams
@@ -24,6 +30,10 @@ We welcome transit professionals, researchers, and technology experts to join ou
 - Share implementation experiences
 - Contribute to best practice documents
 - Attend working group sessions
+
+</div>
+
+<div class="page-content">
 
 ## Current Opportunities
 
@@ -43,6 +53,10 @@ We welcome transit professionals, researchers, and technology experts to join ou
 - Use case development
 - Integration testing
 
+</div>
+
+<div class="page-content">
+
 ## Stay Updated
 
 Subscribe to our newsletter to receive:
@@ -56,6 +70,10 @@ Subscribe to our newsletter to receive:
 <div class="cta-container">
     <button class="cta-button" onclick="alert('Coming soon!')">Subscribe to Newsletter</button>
 </div>
+
+</div>
+
+<div class="page-content">
 
 ## Contact Us
 
@@ -72,3 +90,5 @@ Interested in contributing? Have questions about our work? Get in touch with our
 - Email: [coming soon]
 - Meeting Schedule: Bi-monthly virtual meetings
 - Quarterly in-person workshops
+
+</div>
