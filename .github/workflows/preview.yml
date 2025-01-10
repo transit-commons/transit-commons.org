@@ -65,22 +65,51 @@ jobs:
             const path = require('path');
 
             // Parse changed files
-            const changedFiles = JSON.parse('${{ steps.changed-files.outputs.files }}');
-            const shouldCaptureHomepage = changedFiles.some(file =>
-              file.includes('base.njk') || file.includes('styles.css')
-            );
+            const changedFiles = JSON.parse('${{ steps.changed-files.outputs.files }}' || '[]');
+            console.log('Changed files:', changedFiles);
+
+            if (changedFiles.length === 0) {
+              console.log('No relevant file changes detected');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '## Visual Changes\n\nNo changes to content pages, templates, or styles were detected in this PR.'
+              });
+              return;
+            }
 
             // Get pages to screenshot
             const pagesToCapture = new Set();
+
+            // Check for template/style changes that affect all pages
+            const shouldCaptureHomepage = changedFiles.some(file =>
+              file.includes('base.njk') || file.includes('styles.css')
+            );
             if (shouldCaptureHomepage) {
+              console.log('Template or style changes detected - will capture homepage');
               pagesToCapture.add('/');
             }
+
+            // Add changed content pages
             changedFiles.forEach(file => {
               if (file.endsWith('.md')) {
                 const route = file.replace(/^src/, '').replace(/\.md$/, '/');
+                console.log(`Content change detected - will capture ${route}`);
                 pagesToCapture.add(route);
               }
             });
+
+            if (pagesToCapture.size === 0) {
+              console.log('No pages need to be captured');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '## Visual Changes\n\nThe changes in this PR do not affect the visual appearance of any pages.'
+              });
+              return;
+            }
 
             // Start servers with output logging
             console.log('Starting development servers...');
