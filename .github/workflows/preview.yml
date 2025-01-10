@@ -149,6 +149,13 @@ jobs:
             // Create screenshots directory
             fs.mkdirSync('screenshots', { recursive: true });
 
+            // Ensure screenshot paths exist
+            const getScreenshotPath = (type, route) => {
+              const dir = path.join('screenshots', path.dirname(route));
+              fs.mkdirSync(dir, { recursive: true });
+              return path.join('screenshots', `${type}${route.replace(/\/$/, '')}.png`);
+            };
+
             // Take screenshots
             console.log('Launching Chrome...');
             const browser = await puppeteer.launch({
@@ -168,17 +175,17 @@ jobs:
                 console.log(`Navigating to base version of ${route}...`);
                 await page.goto(`http://localhost:8080${route}`);
                 console.log('Taking base screenshot...');
-                await page.screenshot({
-                  path: `screenshots/base${route.replace(/\/$/, '')}.png`
-                });
+              const basePath = getScreenshotPath('base', route);
+              await page.screenshot({ path: basePath });
+              console.log(`Saved base screenshot to ${basePath}`);
 
-                // Capture PR version
-                console.log(`Navigating to PR version of ${route}...`);
-                await page.goto(`http://localhost:8081${route}`);
-                console.log('Taking PR screenshot...');
-                await page.screenshot({
-                  path: `screenshots/pr${route.replace(/\/$/, '')}.png`
-                });
+              // Capture PR version
+              console.log(`Navigating to PR version of ${route}...`);
+              await page.goto(`http://localhost:8081${route}`);
+              console.log('Taking PR screenshot...');
+              const prPath = getScreenshotPath('pr', route);
+              await page.screenshot({ path: prPath });
+              console.log(`Saved PR screenshot to ${prPath}`);
 
                 // Add to comment
                 const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
@@ -204,4 +211,5 @@ jobs:
               });
             } finally {
               cleanup();
+              process.exit(0);
             }
