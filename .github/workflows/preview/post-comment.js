@@ -22,29 +22,22 @@ module.exports = async ({ github, context }) => {
       return;
     }
 
-    // Get artifact URL
-    const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      run_id: context.runId
-    });
-
-    const previewArtifact = artifacts.find(a => a.name === 'preview-screenshots');
-    if (!previewArtifact) {
-      console.log('No preview screenshots artifact found');
+    // Get tree hash
+    const treeHash = fs.readFileSync('tree-hash.txt', 'utf8').trim();
+    if (!treeHash) {
+      console.log('No tree hash found - the screenshot upload step may have failed');
       return;
     }
 
-    // Build comment with artifact URLs
+    // Build comment with Git URLs
     let comment = '## Visual Changes\n\n';
-    const artifactUrl = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${previewArtifact.id}`;
 
     for (const screenshot of screenshots) {
       comment += `### ${screenshot.pageName}\n`;
       comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
       comment += '<tr>';
-      comment += `<td><img src="${artifactUrl}/screenshots/${screenshot.baseScreenshot}" width="600"></td>`;
-      comment += `<td><img src="${artifactUrl}/screenshots/${screenshot.prScreenshot}" width="600"></td>`;
+      comment += `<td><img src="../blob/${treeHash}/screenshots/${screenshot.baseScreenshot}?raw=true" width="600"></td>`;
+      comment += `<td><img src="../blob/${treeHash}/screenshots/${screenshot.prScreenshot}?raw=true" width="600"></td>`;
       comment += '</tr></table>\n\n';
     }
 
