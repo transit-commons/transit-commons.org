@@ -46,7 +46,7 @@ Several organizations play crucial roles in developing, maintaining, and advanci
 
 ## Public-sector Publishers
 
-Public sector organizations leading the way in transit data publishing and standardization.
+Public sector organizations leading the way in transit data publishing and standardization with active teams dedicated to publishing open-source software.
 
 - [Cal-ITP](https://github.com/cal-itp): California Integrated Travel Project, advancing transit data standards
 - [MBTA](https://github.com/mbta): Massachusetts Bay Transportation Authority developer resources
