@@ -31,10 +31,19 @@ module.exports = async ({ github, context, workingDir }) => {
       .map(file => path.join('screenshots', file));
 
     // Copy screenshots to PR directory
-    fs.mkdirSync('screenshots', { recursive: true });
     for (const file of screenshots) {
+      // Create subdirectories
       const destFile = path.join('.', file);
-      fs.copyFileSync(path.join('..', file), destFile);
+      const destDir = path.dirname(destFile);
+      fs.mkdirSync(destDir, { recursive: true });
+
+      // Use absolute paths for copy
+      const srcFile = path.resolve('..', file);
+      const destFileFull = path.resolve(destFile);
+
+      console.log(`Copying ${srcFile} to ${destFileFull}`);
+      fs.copyFileSync(srcFile, destFileFull);
+
       const hash = git(`git hash-object -w ${destFile}`).trim();
       git(`git update-index --add --cacheinfo 100644,${hash},${file}`);
     }
