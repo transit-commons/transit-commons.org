@@ -158,6 +158,22 @@ nav {
     color: var(--accent-green);
 }
 
+.nav-links a.current {
+    color: var(--accent-green);
+    position: relative;
+}
+
+.nav-links a.current::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-green);
+    border-radius: 1px;
+}
+
 /* Draft Banner */
 .draft-banner {
     background: repeating-linear-gradient(
