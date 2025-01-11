@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-module.exports = async ({ github, context }) => {
+module.exports = async ({ github, context, commitHash }) => {
   try {
     // Check if screenshots.json exists
     if (!fs.existsSync('screenshots.json')) {
@@ -22,13 +22,6 @@ module.exports = async ({ github, context }) => {
       return;
     }
 
-    // Get tree hash
-    const treeHash = fs.readFileSync('tree-hash.txt', 'utf8').trim();
-    if (!treeHash) {
-      console.log('No tree hash found - the screenshot upload step may have failed');
-      return;
-    }
-
     // Build comment with Git URLs
     let comment = '## Visual Changes\n\n';
 
@@ -40,8 +33,8 @@ module.exports = async ({ github, context }) => {
       comment += `### ${screenshot.pageName}\n`;
       comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
       comment += '<tr>';
-      comment += `<td><img src="../blob/${treeHash}/screenshots/${screenshot.baseScreenshot}?raw=true" width="600"></td>`;
-      comment += `<td><img src="../blob/${treeHash}/screenshots/${screenshot.prScreenshot}?raw=true" width="600"></td>`;
+      comment += `<td><img src="../blob/${commitHash}/screenshots/${screenshot.baseScreenshot}?raw=true" width="600"></td>`;
+      comment += `<td><img src="../blob/${commitHash}/screenshots/${screenshot.prScreenshot}?raw=true" width="600"></td>`;
       comment += '</tr></table>\n\n';
     }
 

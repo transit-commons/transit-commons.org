@@ -59,10 +59,7 @@ module.exports = async ({ github, context, workingDir }) => {
     // Push the ref to GitHub
     git(`git push origin refs/preview-screenshots/${treeHash}`);
 
-    // Save the tree hash for the comment step (in parent directory)
-    fs.writeFileSync('../tree-hash.txt', treeHash);
-
-    return treeHash;
+    return commitHash;
   } catch (error) {
     console.error('Error pushing screenshots:', error);
     process.exit(1);
