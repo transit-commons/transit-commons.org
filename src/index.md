@@ -34,6 +34,8 @@ title: Home
                 <li>Research transit data needs</li>
                 <li>Analyze use cases</li>
                 <li>Assess industry practices</li>
+                <li>Identify gaps and opportunities</li>
+                <li>Publish research findings</li>
             </ul>
         </div>
         <div class="group-detail apta">
@@ -44,7 +46,34 @@ title: Home
                 <li>Draft data guidelines</li>
                 <li>Establish best practices</li>
                 <li>Publish standards</li>
+                <li>Support implementation</li>
+                <li>Facilitate knowledge sharing</li>
             </ul>
+        </div>
+    </div>
+</section>
+
+<section id="combined-mission">
+    <div class="container">
+        <h2>Our Combined Mission</h2>
+        <p>Together, these groups create a powerful synergy between research and implementation:</p>
+        <div class="mission-grid">
+            <div class="mission-card">
+                <h3>Research Informs Practice</h3>
+                <p>TRB's research findings directly influence APTA's standards development</p>
+            </div>
+            <div class="mission-card">
+                <h3>Practice Guides Research</h3>
+                <p>Real-world implementation challenges help shape research priorities</p>
+            </div>
+            <div class="mission-card">
+                <h3>Unified Approach</h3>
+                <p>Coordinated efforts ensure alignment between academic research and industry needs</p>
+            </div>
+            <div class="mission-card">
+                <h3>Industry Impact</h3>
+                <p>Combined expertise leads to more effective and practical solutions</p>
+            </div>
         </div>
     </div>
 </section>
