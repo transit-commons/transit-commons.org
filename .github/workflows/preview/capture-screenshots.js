@@ -54,8 +54,8 @@ module.exports = async ({ github, context, io }) => {
   console.log('Starting development servers...');
   const { spawn } = require('child_process');
 
-  const baseServer = spawn('npm', ['start'], { cwd: 'base', detached: true });
-  const prServer = spawn('npm', ['start'], { cwd: 'pr', detached: true });
+    const baseServer = spawn('npx', ['eleventy', '--serve', '--port=8080'], { cwd: 'base', detached: true });
+    const prServer = spawn('npx', ['eleventy', '--serve', '--port=8081'], { cwd: 'pr', detached: true });
 
   const servers = [baseServer, prServer];
   servers.forEach((server, i) => {
