@@ -8,6 +8,8 @@ on:
 permissions:
   issues: write
   pull-requests: write
+  actions: write
+  contents: read
 
 jobs:
   preview:
@@ -155,7 +157,12 @@ jobs:
               fs.mkdirSync(dir, { recursive: true });
 
               // Convert root path to 'home'
-              return path.join(dir, route === '/' ? `home.png` : `${route.replace(/\/$/, '')}.png`);
+              const filename = route === '/' ? `home.png` : `${route.replace(/\/$/, '')}.png`;
+              // Store the path relative to the screenshots directory for artifact upload
+              return {
+                fullPath: path.join(dir, filename),
+                relativePath: path.join(type, filename)
+              };
             };
 
             // Take screenshots
@@ -170,7 +177,7 @@ jobs:
             console.log('Browser ready for screenshots');
 
             try {
-              let comment = '## Visual Changes\n\n';
+              const screenshots = [];
               console.log('Pages to capture:', Array.from(pagesToCapture));
 
               try {
@@ -180,26 +187,25 @@ jobs:
                     console.log(`Navigating to base version of ${route}...`);
                     await page.goto(`http://localhost:8080${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
                     console.log('Taking base screenshot...');
-                    const basePath = getScreenshotPath('base', route);
-                    await page.screenshot({ path: basePath });
-                    console.log(`Saved base screenshot to ${basePath}`);
+                    const { fullPath: baseFullPath, relativePath: baseRelPath } = getScreenshotPath('base', route);
+                    await page.screenshot({ path: baseFullPath });
+                    console.log(`Saved base screenshot to ${baseFullPath}`);
 
                     // Capture PR version
                     console.log(`Navigating to PR version of ${route}...`);
                     await page.goto(`http://localhost:8081${route}`, { waitUntil: 'networkidle0', timeout: 30000 });
                     console.log('Taking PR screenshot...');
-                    const prPath = getScreenshotPath('pr', route);
-                    await page.screenshot({ path: prPath });
-                    console.log(`Saved PR screenshot to ${prPath}`);
+                    const { fullPath: prFullPath, relativePath: prRelPath } = getScreenshotPath('pr', route);
+                    await page.screenshot({ path: prFullPath });
+                    console.log(`Saved PR screenshot to ${prFullPath}`);
 
-                    // Add to comment
-                    const pageName = route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim();
-                    comment += `### ${pageName}\n`;
-                    comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
-                    comment += '<tr>';
-                    comment += `<td><img src="${basePath}" width="600"></td>`;
-                    comment += `<td><img src="${prPath}" width="600"></td>`;
-                    comment += '</tr></table>\n\n';
+                    // Record screenshot info
+                    screenshots.push({
+                      route,
+                      pageName: route === '/' ? 'Homepage' : route.replace(/\//g, ' ').trim(),
+                      baseScreenshot: baseRelPath,
+                      prScreenshot: prRelPath
+                    });
                   } catch (pageError) {
                     console.error(`Error capturing screenshots for ${route}:`, pageError);
                   }
@@ -209,14 +215,8 @@ jobs:
                 await browser.close();
                 console.log('Browser closed');
 
-                // Post comment
-                console.log('Posting comment to PR...');
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: context.issue.number,
-                  body: comment
-                });
+                // Save screenshot info
+                fs.writeFileSync('screenshots.json', JSON.stringify(screenshots, null, 2));
               } catch (err) {
                 console.error('Error in screenshot process:', err);
                 process.exit(1);
@@ -224,4 +224,76 @@ jobs:
             } finally {
               cleanup();
               process.exit(0);
+            }
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-screenshots
+          path: screenshots/**/*.png
+          if-no-files-found: error
+
+      - name: Post PR comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            try {
+              // Check if screenshots.json exists
+              if (!fs.existsSync('screenshots.json')) {
+                console.log('No screenshots.json found - the screenshot step may have failed');
+                return;
+              }
+
+              // Read screenshot info
+              let screenshots;
+              try {
+                screenshots = JSON.parse(fs.readFileSync('screenshots.json', 'utf8'));
+              } catch (error) {
+                console.error('Error reading screenshots.json:', error);
+                return;
+              }
+
+              if (!Array.isArray(screenshots) || screenshots.length === 0) {
+                console.log('No screenshots were captured');
+                return;
+              }
+
+              // Get artifact URL
+              const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.runId
+              });
+
+              const previewArtifact = artifacts.find(a => a.name === 'preview-screenshots');
+              if (!previewArtifact) {
+                console.log('No preview screenshots artifact found');
+                return;
+              }
+
+              // Build comment with artifact URLs
+              let comment = '## Visual Changes\n\n';
+              const artifactUrl = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/suites/${context.runId}/artifacts/${previewArtifact.id}`;
+
+              for (const screenshot of screenshots) {
+                comment += `### ${screenshot.pageName}\n`;
+                comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
+                comment += '<tr>';
+                comment += `<td><img src="${artifactUrl}/screenshots/${screenshot.baseScreenshot}" width="600"></td>`;
+                comment += `<td><img src="${artifactUrl}/screenshots/${screenshot.prScreenshot}" width="600"></td>`;
+                comment += '</tr></table>\n\n';
+              }
+
+              // Post comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            } catch (error) {
+              console.error('Error in post-screenshot process:', error);
+              process.exit(1);
             }
