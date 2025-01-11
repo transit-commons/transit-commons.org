@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
 
-module.exports = async ({ github, context }) => {
+module.exports = async ({ github, context, io }) => {
   // Parse changed files
   const changedFiles = JSON.parse(process.env.CHANGED_FILES || '[]');
   console.log('Changed files:', changedFiles);

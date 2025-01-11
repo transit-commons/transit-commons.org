@@ -65,7 +65,7 @@ jobs:
         with:
           script: |
             const script = require('./pr/.github/workflows/preview/capture-screenshots.js')
-            await script({ github, context })
+            await script({ github, context, io })
 
       - name: Configure Git
         run: |
