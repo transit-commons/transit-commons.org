@@ -32,6 +32,10 @@ module.exports = async ({ github, context }) => {
     // Build comment with Git URLs
     let comment = '## Visual Changes\n\n';
 
+    // Add compare link
+    const compareUrl = `${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/compare/${context.payload.pull_request.base.sha}...${context.payload.pull_request.head.sha}`;
+    comment += `Changes: [${context.payload.pull_request.base.sha.slice(0,7)}...${context.payload.pull_request.head.sha.slice(0,7)}](${compareUrl})\n\n`;
+
     for (const screenshot of screenshots) {
       comment += `### ${screenshot.pageName}\n`;
       comment += '<table><tr><td>Before</td><td>After</td></tr>\n';
