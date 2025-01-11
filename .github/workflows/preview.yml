@@ -226,6 +226,9 @@ jobs:
               process.exit(0);
             }
 
+      ## TODO: push screenshots to a git branch instead of using artifact
+      # See: https://stackoverflow.com/questions/41581151/how-to-upload-an-image-to-use-in-issue-comments-via-github-api
+      # See: https://github.com/takahirom/roborazzi-compare-on-github-comment-sample/blob/main/.github%2Fworkflows%2FCompareScreenshotComment.yml
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
         with:
