@@ -64,7 +64,7 @@ jobs:
           CHANGED_FILES: ${{ steps.changed-files.outputs.files }}
         with:
           script: |
-            const script = require('./.github/workflows/preview/capture-screenshots.js')
+            const script = require('./pr/.github/workflows/preview/capture-screenshots.js')
             await script({ github, context })
 
       - name: Configure Git
@@ -77,12 +77,12 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const script = require('./.github/workflows/preview/push-screenshots.js')
+            const script = require('./pr/.github/workflows/preview/push-screenshots.js')
             await script({ github, context, workingDir: 'pr' })
 
       - name: Post PR comment
         uses: actions/github-script@v7
         with:
           script: |
-            const script = require('./.github/workflows/preview/post-comment.js')
+            const script = require('./pr/.github/workflows/preview/post-comment.js')
             await script({ github, context })
