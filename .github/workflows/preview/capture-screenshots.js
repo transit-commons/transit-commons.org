@@ -23,7 +23,7 @@ module.exports = async ({ github, context, io }) => {
 
   // Check for template/style changes that affect all pages
   const shouldCaptureHomepage = changedFiles.some(file =>
-    file.includes('base.njk') || file.includes('styles.css')
+    file.includes('base.njk') || file.includes('styles.css') || file == 'src/index.md'
   );
   if (shouldCaptureHomepage) {
     console.log('Template or style changes detected - will capture homepage');
@@ -32,7 +32,7 @@ module.exports = async ({ github, context, io }) => {
 
   // Add changed content pages
   changedFiles.forEach(file => {
-    if (file.endsWith('.md')) {
+    if (file.endsWith('.md') && file != 'src/index.md') {
       const route = file.replace(/^src/, '').replace(/\.md$/, '/');
       console.log(`Content change detected - will capture ${route}`);
       pagesToCapture.add(route);
