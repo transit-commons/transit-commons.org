@@ -7,7 +7,7 @@ title: Standards Process
 
 # APTA Standards Process
 
-The APTA Data Standards & Utilization Sub-working Group follows a collaborative, community-driven process to develop and maintain transit data standards documentation. Our process emphasizes transparency, inclusivity, and practical implementation guidance.
+We work through the standards process provided by APTA to publish documents that innovators embedded within transit agencies can use to make change inside their organizations. This process emphasizes transparency, inclusivity, and practical implementation guidance to help practitioners advance data standards within their agencies.
 
 ## Document Focus
 

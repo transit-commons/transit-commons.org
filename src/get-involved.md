@@ -7,29 +7,43 @@ title: Get Involved
 
 <div class="page-content">
 
-## Join Our Working Groups
+## Join Our Community
 
-We welcome transit professionals, researchers, and technology experts to join our collaborative efforts. Your expertise can help shape the future of transit data standards and practices.
+Transit Commons welcomes practitioners, developers, and innovators who want to advance transit technology through experimental projects and emerging initiatives.
 
-### TRB AP090(1) Participation
+### Ways to Participate
 
-- Contribute to research initiatives
-- Participate in working group meetings
-- Review and provide feedback on research papers
-- Present findings at TRB conferences
-- Collaborate on use case studies
+- Lead or contribute to experimental projects
+- Share your implementation experiences
+- Test new approaches and provide feedback
+- Document practical insights
+- Connect with other practitioners
 
 </div>
 
 <div class="page-content">
 
-### APTA Sub-working Group Involvement
+## Industry Engagement
 
-- Join standards development teams
-- Participate in technical reviews
+### TRB Engagement
+
+Drive research and understanding through TRB AP090(1):
+
+- Contribute to research initiatives
+- Participate in working group meetings
+- Present findings at TRB conferences
+- Shape research priorities
+- Build academic partnerships
+
+### APTA Engagement
+
+Advance best practices through APTA's standards process:
+
+- Contribute to standards development
 - Share implementation experiences
-- Contribute to best practice documents
-- Attend working group sessions
+- Help create practical guidance
+- Participate in technical reviews
+- Support industry adoption
 
 </div>
 
@@ -37,58 +51,85 @@ We welcome transit professionals, researchers, and technology experts to join ou
 
 ## Current Opportunities
 
-### Research Projects
+### Project Areas
 
-- Data standardization impact studies
-- Technology adoption research
+- Open data standards development
+- System integration experiments
 - Implementation case studies
-- Cost-benefit analyses
-- Industry surveys and interviews
+- Technology prototypes
+- Best practices documentation
 
-### Standards Development
+### Contribution Types
 
-- Technical writing
+- Technical development
+- Documentation writing
 - Implementation testing
-- Documentation review
 - Use case development
-- Integration testing
+- Knowledge sharing
 
 </div>
 
 <div class="page-content">
 
-## Stay Updated
+## Community Resources
 
-Subscribe to our newsletter to receive:
+### Discussion Forums
 
-- Meeting announcements
-- Research updates
-- Publication releases
-- Conference information
-- Collaboration opportunities
+- Join our [GitHub Discussions](https://github.com/orgs/transit-commons/discussions)
+- Share ideas and ask questions
+- Connect with other practitioners
+- Learn from implementation experiences
+- Find collaboration opportunities
+
+### Project Repositories
+
+- Browse our [GitHub repositories](https://github.com/transit-commons)
+- Contribute to ongoing projects
+- Start new experimental initiatives
+- Share your own projects
+- Collaborate with others
+
+</div>
+
+<div class="page-content">
+
+## Stay Connected
+
+Subscribe to stay informed about:
+
+- New experimental projects
+- Community discussions
+- Implementation insights
+- Industry engagement opportunities
+- Project outcomes
 
 <div class="cta-container">
-    <button class="cta-button" onclick="alert('Coming soon!')">Subscribe to Newsletter</button>
+    <button class="cta-button" onclick="alert('Coming soon!')">Subscribe to Updates</button>
 </div>
 
 </div>
 
 <div class="page-content">
 
-## Contact Us
+## Contact Information
 
-Interested in contributing? Have questions about our work? Get in touch with our working groups:
+### Community Channels
 
-### TRB AP090(1) Contact
+- GitHub Discussions: [transit-commons/discussions](https://github.com/orgs/transit-commons/discussions)
+- Project Updates: Subscribe above
 
-- Email: [coming soon]
-- Meeting Schedule: Monthly virtual meetings
+### Industry Working Groups
+
+#### TRB AP090(1)
+
+- Monthly virtual meetings
 - Annual in-person meeting at TRB
-
-### APTA Sub-working Group Contact
-
 - Email: [coming soon]
-- Meeting Schedule: Bi-monthly virtual meetings
+
+#### APTA Standards Working Group
+
+- Bi-monthly virtual meetings
 - Quarterly in-person workshops
+- Email: [coming soon]
 
 </div>

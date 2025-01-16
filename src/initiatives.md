@@ -7,64 +7,91 @@ title: Initiatives
 
 <div class="page-content">
 
-## Research Projects
+## Experimental Projects
 
-Our ongoing research projects focus on understanding and improving transit data implementation across agencies:
+Our community is exploring innovative approaches to transit technology through hands-on experimentation:
 
-### Data Needs Assessment
-- Surveying transit agencies of various sizes
-- Identifying common challenges and requirements
-- Analyzing emerging technology needs
-- Documenting best practices and lessons learned
+### Open Data Standards
 
-### Use Case Analysis
-- Mapping current data utilization patterns
-- Identifying opportunities for improved data sharing
-- Evaluating emerging transit data applications
-- Developing implementation recommendations
+- Prototyping new approaches to transit data exchange
+- Testing emerging data formats and specifications
+- Documenting implementation experiences
+- Sharing practical insights and lessons learned
+
+### Technology Integration
+
+- Exploring system integration patterns
+- Experimenting with new APIs and protocols
+- Building proof-of-concept implementations
+- Developing reference architectures
 
 </div>
 
 <div class="page-content">
 
-## Standards Development
+## Community Development
 
-We're actively working on creating and refining data standards for transit operations:
+We're fostering collaboration and knowledge sharing among transit practitioners:
+
+### Practitioner Networks
+
+- Connecting professionals across agencies
+- Facilitating peer learning and support
+- Sharing implementation experiences
+- Building communities of practice
+
+### Knowledge Base
+
+- Documenting emerging practices
+- Collecting case studies and examples
+- Creating implementation guides
+- Maintaining technical resources
+
+</div>
+
+<div class="page-content">
+
+## Emerging Solutions
+
+Our community is actively working on practical solutions to common challenges:
 
 ### Current Focus Areas
-- Real-time vehicle location data standards
-- Service disruption notification formats
-- Passenger counting system data integration
-- Fare system data standardization
-- Schedule and routing data specifications
 
-### Implementation Guidelines
-- Technical documentation development
-- Integration pathway recommendations
-- Migration strategies for legacy systems
-- Validation and testing procedures
+- Real-time data integration approaches
+- Service disruption handling patterns
+- Passenger counting system implementations
+- Fare system modernization strategies
+- Schedule and routing data improvements
+
+### Implementation Support
+
+- Technical documentation
+- Reference implementations
+- Testing frameworks
+- Migration strategies
 
 </div>
 
 <div class="page-content">
 
-## Industry Surveys
+## Field Research
 
-Our comprehensive industry surveys help understand the current state of transit data management:
+We're gathering real-world insights to inform future development:
 
-### Survey Topics
-- Data collection methodologies
-- Storage and processing systems
-- Integration challenges
-- Security and privacy practices
-- Resource allocation and staffing
-- Technology adoption rates
+### Areas of Investigation
+
+- Implementation patterns across agencies
+- Technology adoption challenges
+- Integration approaches
+- Resource optimization strategies
+- Emerging technology impacts
 
 ### Outcomes
-- Detailed industry reports
-- Trend analysis and forecasting
-- Recommendation documents
-- Implementation guides
-- Case studies and success stories
+
+- Practical insights and recommendations
+- Technical implementation guides
+- Best practices documentation
+- Success stories and lessons learned
+- Reference architectures and examples
 
 </div>
