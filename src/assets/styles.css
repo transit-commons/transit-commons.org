@@ -232,18 +232,47 @@ nav {
 
 #hero h1 {
     font-size: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.hero-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 3rem;
+.hero-tagline {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mission-summary {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    background: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mission-summary p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.mission-summary a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+}
+
+.mission-summary a:hover {
+    color: var(--accent-green);
 }
 
 .group-box {
