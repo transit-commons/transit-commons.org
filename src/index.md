@@ -12,6 +12,9 @@ title: Home
         <h1>Transit Commons</h1>
         <div class="hero-content">
             <p class="hero-tagline">A community of practice advancing open standards and technology in public transportation</p>
+            <div class="mission-summary">
+                <p>Transit Commons bridges a crucial gap in public transportation's technology ecosystem. While established institutions like APTA and MobilityData provide stable homes for industry standards, and countless innovators develop solutions within their organizations, many promising ideas need a middle ground to grow. We offer a community-governed space where transit practitioners can collaborate on emerging technologies and data standards, nurturing them until they're ready for broader industry adoption. <a href="/mission">Read more about why we created Transit Commons →</a></p>
+            </div>
         </div>
     </div>
 </section>
