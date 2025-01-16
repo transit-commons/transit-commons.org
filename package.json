@@ -1,7 +1,7 @@
 {
-  "name": "transit-data.org",
+  "name": "transit-commons.org",
   "version": "1.0.0",
-  "description": "Website for transit-data.org collaboration between TRB AP090(1) and APTA",
+  "description": "A community of transit practitioners advancing open standards and technology through experimental projects",
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
@@ -10,15 +10,17 @@
   "keywords": [
     "transit",
     "data",
-    "standards"
+    "standards",
+    "community",
+    "open-source"
   ],
-  "author": "",
+  "author": "Transit Commons Community",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/transit-data-collab/transit-data.org"
+    "url": "https://github.com/transit-commons/transit-commons.org"
   }
 }
