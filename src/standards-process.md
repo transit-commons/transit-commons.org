@@ -7,7 +7,7 @@ title: Standards Process
 
 # APTA Standards Process
 
-The APTA Data Standards & Utilization Sub-working Group follows a collaborative, community-driven process to develop and maintain transit data standards documentation. Our process emphasizes transparency, inclusivity, and practical implementation guidance.
+We work through the standards process provided by APTA to publish documents that innovators embedded within transit agencies can use to make change inside their organizations. This process emphasizes transparency, inclusivity, and practical implementation guidance to help practitioners advance data standards within their agencies.
 
 ## Document Focus
 
@@ -46,7 +46,7 @@ Every document includes:
 
 We believe the best standards come from diverse perspectives and broad participation. During this phase:
 
-- A collaborative Google Doc is created and shared widely using [our standard template](https://github.com/transit-data-collab/documents/blob/main/templates/community-feedback.md)
+- A collaborative Google Doc is created and shared widely using [our standard template](https://github.com/transit-commons/apta-standards/blob/main/templates/community-feedback.md)
 - The coordinator provides a basic outline to get things started
 - **Everyone is encouraged to contribute**, no matter how small:
     - Drop in quick thoughts or bullet points
@@ -84,7 +84,7 @@ A comment period deadline will be set, but the emphasis is on gathering a divers
 ### 5. Release Candidate
 
 - Conversion to Markdown format
-- Pull Request to [documents repository](https://github.com/transit-data-collab/documents)
+- Pull Request to [apta-standards repository](https://github.com/transit-commons/apta-standardss)
 - Final review period
 - Incorporation of last-minute feedback
 

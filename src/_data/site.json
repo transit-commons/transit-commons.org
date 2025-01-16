@@ -1,9 +1,9 @@
 {
-    "title": "transit-data.org",
-    "description": "Advancing Transit Data Standards - A collaboration between TRB AP090(1) and APTA",
-    "url": "https://transit-data.org",
+    "title": "transit-commons.org",
+    "description": "A community of transit practitioners advancing open standards and technology through experimental projects",
+    "url": "https://transit-commons.org",
     "author": {
-        "name": "TRB AP090(1) & APTA Data Standards Group",
+        "name": "Transit Commons Community",
         "email": ""
     },
     "buildYear": "2024"

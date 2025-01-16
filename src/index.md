@@ -9,70 +9,30 @@ title: Home
 
 <section id="hero">
     <div class="container">
-        <h1>Advancing Transit Data Standards</h1>
-        <div class="hero-content">
-            <div class="group-box trb">
-                <h2>TRB AP090(1)</h2>
-                <p>Transit Data Subcommittee on Data Infrastructure and Technology</p>
-            </div>
-            <div class="collaboration-symbol">×</div>
-            <div class="group-box apta">
-                <h2>APTA</h2>
-                <p>Data Standards & Utilization Sub-working Group</p>
-            </div>
+        <h1>Transit Commons</h1>
+        <p class="hero-tagline">A community of practice advancing open standards and technology in public transportation</p>
+        <div class="mission-summary">
+            <p>Transit Commons bridges a crucial gap in public transportation's technology ecosystem. While established institutions like APTA and MobilityData provide stable homes for industry standards, and countless innovators develop solutions within their organizations, many promising ideas need a middle ground to grow. We offer a community-governed space where transit practitioners can collaborate on emerging technologies and data standards, nurturing them until they're ready for broader industry adoption. <a href="/mission">Read more about why we created Transit Commons →</a></p>
         </div>
     </div>
 </section>
 
 <section id="about">
     <div class="container">
-        <div class="group-detail trb">
-            <h2>TRB AP090(1)</h2>
-            <h3>Research & Planning Focus</h3>
-            <p>The TRB Transit Data Subcommittee on Data Infrastructure and Technology convenes planners and researchers to conduct comprehensive research on transit data needs, use cases, and industry practices.</p>
-            <ul class="mission-points">
-                <li>Research transit data needs</li>
-                <li>Analyze use cases</li>
-                <li>Assess industry practices</li>
-                <li>Identify gaps and opportunities</li>
-                <li>Publish research findings</li>
-            </ul>
-        </div>
-        <div class="group-detail apta">
-            <h2>APTA Sub-working Group</h2>
-            <h3>Implementation & Standards Focus</h3>
-            <p>The APTA Data Standards & Utilization sub-working group brings together transit business, operations, and IT practitioners to develop and publish guidelines and best practices through APTA's standards process.</p>
-            <ul class="mission-points">
-                <li>Draft data guidelines</li>
-                <li>Establish best practices</li>
-                <li>Publish standards</li>
-                <li>Support implementation</li>
-                <li>Facilitate knowledge sharing</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section id="combined-mission">
-    <div class="container">
-        <h2>Our Combined Mission</h2>
-        <p>Together, these groups create a powerful synergy between research and implementation:</p>
+        <h2>Our Community</h2>
+        <p>Transit Commons provides a collaborative space for transit industry practitioners to develop experimental ideas and emerging technologies outside of traditional institutional frameworks.</p>
         <div class="mission-grid">
             <div class="mission-card">
-                <h3>Research Informs Practice</h3>
-                <p>TRB's research findings directly influence APTA's standards development</p>
+                <h3>Experimental Space</h3>
+                <p>A venue for projects that need development before entering formal institutional frameworks</p>
             </div>
             <div class="mission-card">
-                <h3>Practice Guides Research</h3>
-                <p>Real-world implementation challenges help shape research priorities</p>
+                <h3>Practitioner-Led</h3>
+                <p>Built by and for transit professionals working on practical solutions</p>
             </div>
             <div class="mission-card">
-                <h3>Unified Approach</h3>
-                <p>Coordinated efforts ensure alignment between academic research and industry needs</p>
-            </div>
-            <div class="mission-card">
-                <h3>Industry Impact</h3>
-                <p>Combined expertise leads to more effective and practical solutions</p>
+                <h3>Open Collaboration</h3>
+                <p>Committed to open source and open data approaches</p>
             </div>
         </div>
     </div>
@@ -83,34 +43,36 @@ title: Home
         <h2>Current Initiatives</h2>
         <div class="initiatives-grid">
             <div class="initiative-card">
-                <h3>Research Projects</h3>
-                <p>Ongoing studies and analysis of transit data implementation across agencies</p>
+                <h3>Emerging Projects</h3>
+                <p>Experimental initiatives pushing the boundaries of transit technology</p>
             </div>
             <div class="initiative-card">
                 <h3>Standards Development</h3>
-                <p>Creation and refinement of data standards for transit operations</p>
+                <p>Collaborative work on open data standards and specifications</p>
             </div>
             <div class="initiative-card">
-                <h3>Industry Surveys</h3>
-                <p>Assessment of current practices and needs in transit data management</p>
+                <h3>Knowledge Exchange</h3>
+                <p>Sharing experiences and lessons learned across agencies</p>
             </div>
         </div>
     </div>
 </section>
 
-<section id="volunteer">
+<section id="engagement">
     <div class="container">
-        <h2>Get Involved</h2>
-        <div class="volunteer-grid">
-            <div class="volunteer-card">
-                <h3>Join Our Efforts</h3>
-                <p>Contribute your expertise to advancing transit data standards and practices</p>
-                <button class="cta-button">Volunteer Now</button>
+        <h2>Ways to Engage</h2>
+        <div class="engagement-grid">
+            <div class="engagement-card">
+                <h3>Join the Community</h3>
+                <p>Connect with practitioners working on similar challenges</p>
             </div>
-            <div class="volunteer-card">
-                <h3>Stay Updated</h3>
-                <p>Subscribe to our newsletter for the latest developments and opportunities</p>
-                <button class="cta-button">Subscribe</button>
+            <div class="engagement-card">
+                <h3>Start a Project</h3>
+                <p>Propose and lead new experimental initiatives</p>
+            </div>
+            <div class="engagement-card">
+                <h3>Share Knowledge</h3>
+                <p>Contribute your expertise and learn from others</p>
             </div>
         </div>
     </div>
@@ -118,19 +80,37 @@ title: Home
 
 <section id="outcomes">
     <div class="container">
-        <h2>Outcomes & Publications</h2>
+        <h2>Community Outcomes</h2>
         <div class="outcomes-grid">
             <div class="outcome-card">
-                <h3>Research Papers</h3>
-                <p>Published findings and recommendations from our research initiatives</p>
+                <h3>Open Standards</h3>
+                <p>Collaborative development of transit data specifications</p>
             </div>
             <div class="outcome-card">
-                <h3>Standards Documents</h3>
-                <p>Official guidelines and best practices for transit data management</p>
+                <h3>Proof of Concepts</h3>
+                <p>Experimental projects demonstrating new possibilities</p>
             </div>
             <div class="outcome-card">
-                <h3>Case Studies</h3>
-                <p>Real-world implementations and success stories</p>
+                <h3>Best Practices</h3>
+                <p>Shared learnings from practical implementations</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="get-involved">
+    <div class="container">
+        <h2>Get Involved</h2>
+        <div class="volunteer-grid">
+            <div class="volunteer-card">
+                <h3>Join Our Community</h3>
+                <p>Contribute to experimental projects and emerging initiatives</p>
+                <button class="cta-button">Get Started</button>
+            </div>
+            <div class="volunteer-card">
+                <h3>Stay Connected</h3>
+                <p>Keep up with the latest community developments</p>
+                <button class="cta-button">Subscribe</button>
             </div>
         </div>
     </div>

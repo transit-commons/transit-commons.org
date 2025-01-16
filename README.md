@@ -1,6 +1,10 @@
-# transit-data.org
+# transit-commons.org
 
-Website for the transit-data.org collaboration between the TRB AP090(1) Data Infrastructure & Governance Subcommittee and the APTA Sub-working group on Data Standards & Utilization.
+Website for Transit Commons, a community of transit practitioners advancing open standards and technology through experimental projects.
+
+## About Transit Commons
+
+Transit Commons provides a community-governed space where transit practitioners can collaborate on emerging technologies and data standards, nurturing them until they're ready for broader industry adoption. While established institutions like APTA and MobilityData provide stable homes for industry standards, Transit Commons offers a middle ground where experimental ideas can flourish.
 
 ## Repository Structure
 
@@ -64,7 +68,11 @@ The site will be available at `http://localhost:8080` with live reload enabled.
 
    - Build the site
    - Deploy to GitHub Pages
-   - Make changes live at transit-data.org
+   - Make changes live at transit-commons.org
+
+## Contributing
+
+Transit Commons welcomes contributions from transit practitioners, developers, and innovators who want to advance transit technology. Whether you're fixing a typo, improving the design, or suggesting new content, your help is appreciated.
 
 ## License
 
